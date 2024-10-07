@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  height: 100svh;
+}
+.main {
+  width: 100%;
+  padding: rem(20px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}

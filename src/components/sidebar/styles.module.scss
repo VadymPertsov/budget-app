@@ -1,0 +1,36 @@
+.root {
+  flex: 0 0 rem(300px);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid $border-color;
+  box-shadow: 0 0 5px $shadow-color;
+  background: $light-gray;
+}
+.logo {
+  padding: rem(20px);
+}
+.item {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  &:hover {
+    color: $purple;
+    background: colorAdjust($purple, 20%);
+  }
+}
+.link {
+  display: block;
+  width: 100%;
+  padding: rem(10px) rem(20px);
+  text-transform: capitalize;
+}
+.list {
+  flex: 1 1 auto;
+}
+.auth {
+  margin-top: 1rem;
+}
+.button {
+  padding: rem(10px) rem(20px);
+  width: 100%;
+  text-align: left;
+}

@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  gap: rem(16px);
+  flex-direction: column;
+}
+
+.income {
+  color: green;
+}
+.expenses {
+  color: red;
+}
+.item {
+}
