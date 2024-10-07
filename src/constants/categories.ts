@@ -1,4 +1,4 @@
-export const expenseCategories = [
+export const EXPENSE_CATEGORIES = [
   'Food',
   'Clothing',
   'Transportation',
@@ -21,7 +21,7 @@ export const expenseCategories = [
   'Miscellaneous',
 ]
 
-export const incomeCategories = [
+export const INCOME_CATEGORIES = [
   'Salary',
   'Bonus',
   'Freelance Work',

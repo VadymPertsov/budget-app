@@ -1,7 +1,5 @@
 .root {
-  display: flex;
-  gap: rem(16px);
-  flex-direction: column;
+  margin-top: 2rem;
 }
 
 .income {
@@ -10,5 +8,14 @@
 .expenses {
   color: red;
 }
-.item {
+.list {
+  display: flex;
+  gap: rem(16px);
+  flex-direction: column;
+}
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }

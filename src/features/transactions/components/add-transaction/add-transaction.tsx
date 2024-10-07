@@ -1,7 +1,8 @@
+import { Button } from '@components/_shared/button'
 import { Input } from '@components/_shared/input'
 import { Select } from '@components/_shared/select'
 import { auth } from '@components/firebase'
-import { expenseCategories, incomeCategories } from '@constants/categories'
+import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from '@constants/categories'
 import { addTransaction, QUERY_KEYS } from '@features/transactions/api'
 import { Transaction } from '@features/transactions/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -10,20 +11,19 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 
 import styles from './styles.module.scss'
 
-const allCategories = [...incomeCategories, ...expenseCategories]
-
 interface AddTransactionProps {
   onTransactionAdded: () => void
+  tab: Transaction['type']
 }
 
 export const AddTransaction = (props: AddTransactionProps) => {
-  const { onTransactionAdded } = props
+  const { onTransactionAdded, tab } = props
 
   const [user] = useAuthState(auth)
   const [transaction, setTransaction] = useState<Transaction>({
     value: '',
     category: '',
-    type: 'income',
+    type: tab,
     createdAt: new Date().toISOString(),
   })
 
@@ -44,8 +44,8 @@ export const AddTransaction = (props: AddTransactionProps) => {
       setTransaction({
         value: '',
         category: '',
-        type: 'income',
-        createdAt: '',
+        type: tab,
+        createdAt: new Date().toISOString(),
       })
       onTransactionAdded()
     },
@@ -66,7 +66,7 @@ export const AddTransaction = (props: AddTransactionProps) => {
         const newTransaction = { ...prev, [field]: value }
 
         if (field === 'category') {
-          newTransaction.type = incomeCategories.includes(value as string)
+          newTransaction.type = INCOME_CATEGORIES.includes(value as string)
             ? 'income'
             : 'expenses'
         }
@@ -88,18 +88,16 @@ export const AddTransaction = (props: AddTransactionProps) => {
         onChange={handleInputChange('category')}
         label="Category"
         placeholder="Select category"
-        options={allCategories.sort()}
+        options={tab === 'expenses' ? EXPENSE_CATEGORIES : INCOME_CATEGORIES}
         value={transaction.category}
       />
-      <button
+      <Button
         onClick={handleAddTransaction}
-        className={styles.button}
         disabled={
           mutation.isPending || !transaction.value || !transaction.category
         }
-      >
-        {mutation.isPending ? 'Adding...' : 'Add'}
-      </button>
+        text={mutation.isPending ? 'Adding...' : 'Add'}
+      />
       {mutation.isError && <p>Error: {mutation.error.message}</p>}
     </div>
   )
