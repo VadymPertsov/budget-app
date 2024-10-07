@@ -14,9 +14,13 @@ export const Select = (props: SelectProps) => {
   return (
     <div className={styles.root}>
       {label && <p className={styles.label}>{label}</p>}
-      <select onChange={e => onChange(e.target.value)} value={value}>
+      <select
+        className={styles.select}
+        onChange={e => onChange(e.target.value)}
+        value={value}
+      >
         <option value="">{placeholder}</option>
-        {options.map((option, index) => (
+        {options.sort().map((option, index) => (
           <option key={index} value={option}>
             {option}
           </option>
