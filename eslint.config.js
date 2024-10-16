@@ -34,15 +34,15 @@ export default [
       },
     },
     rules: {
-      // React Hooks rules
+      // Custom rules
+      'no-unused-vars': 'warn',
+      'react/display-name': 'off',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
-
-      // Unused imports and variables
       'unused-imports/no-unused-imports': 'warn',
       'unused-imports/no-unused-vars': [
         'warn',
@@ -53,14 +53,14 @@ export default [
           argsIgnorePattern: '^_',
         },
       ],
-
-      // TypeScript specific rules
-      '@typescript-eslint/no-unused-vars': 'off', // Disabled in favor of unused-imports
-
-      // CSS Modules rules
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          args: 'after-used',
+          ignoreRestSiblings: true,
+        },
+      ],
       'css-modules/no-unused-class': 'warn',
-
-      // Import order and style rules
       'import/order': [
         'error',
         {
@@ -76,6 +76,10 @@ export default [
           },
         },
       ],
+      // Add recommended rules here manually if necessary
+      '@typescript-eslint/no-require-imports': 'error',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      'react/prop-types': 'off', // Disable prop-types as we're using TypeScript
     },
   },
 ];

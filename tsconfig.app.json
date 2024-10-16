@@ -12,11 +12,16 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
+    "outDir": "./dist",
     "jsx": "react-jsx",
 
     /* Linting */
     "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
     "noUnusedLocals": true,
+    "forceConsistentCasingInFileNames": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
@@ -34,5 +39,5 @@
     }
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
