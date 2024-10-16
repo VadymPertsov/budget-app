@@ -1,7 +1,7 @@
 import { CurrencyLabels } from 'types'
 import { create } from 'zustand'
 
-export const CURRENCY: CurrencyLabels[] = ['uah', 'usd', 'eur']
+export const CURRENCY: CurrencyLabels[] = ['UAH', 'USD', 'EUR']
 
 interface State {
   currency: CurrencyLabels
@@ -13,7 +13,7 @@ interface Action {
 }
 
 export const useCurrencyStore = create<State & Action>(set => ({
-  currency: 'uah',
+  currency: 'UAH',
   allCurrency: CURRENCY,
   setCurrency: currency => set(() => ({ currency })),
 }))

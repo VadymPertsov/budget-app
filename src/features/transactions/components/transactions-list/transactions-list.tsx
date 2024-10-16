@@ -1,4 +1,5 @@
 import { Button } from '@components/_shared/button'
+import { CurrentCurrency } from '@components/_shared/current-currency'
 import { useTransactionsStore } from '@features/transactions/store'
 import { Transaction, TransactionsData } from '@features/transactions/types'
 import { normalizeDate } from '@utils/normalize-date'
@@ -7,7 +8,6 @@ import { useCallback, useMemo } from 'react'
 import { TransactionTabs } from 'types'
 
 import styles from './styles.module.scss'
-import { CurrentCurrency } from '@components/_shared/current-currency'
 
 interface TransactionsListProps {
   transactions: TransactionsData | null | undefined

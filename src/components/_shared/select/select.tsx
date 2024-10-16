@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 
 interface SelectProps<T> {
   label?: string
-  placeholder: string
+  placeholder?: string
   options: T[]
   onChange: (value: T) => void
   value: T
@@ -27,7 +27,7 @@ export const Select = <T extends string | number>({
         onChange={e => onChange(e.target.value as T)}
         value={value}
       >
-        <option value="">{placeholder}</option>
+        {placeholder && <option value="">{placeholder}</option>}
         {options.sort().map((option, index) => (
           <option key={index} value={option}>
             {option}

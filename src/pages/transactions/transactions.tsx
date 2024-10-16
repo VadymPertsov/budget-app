@@ -1,3 +1,4 @@
+import { CurrentCurrency } from '@components/_shared/current-currency'
 import { auth } from '@components/firebase'
 import { fetchTransactions, QUERY_KEYS } from '@features/transactions/api'
 import { AddTransaction } from '@features/transactions/components/add-transaction'
@@ -7,7 +8,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 import styles from './styles.module.scss'
-import { CurrentCurrency } from '@components/_shared/current-currency'
 
 export const Transactions = () => {
   const [user] = useAuthState(auth)

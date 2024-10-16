@@ -9,6 +9,7 @@ import { Transaction } from '@features/transactions/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { TransactionTabs } from 'types'
 
 import styles from './styles.module.scss'
 
@@ -90,7 +91,7 @@ export const AddTransaction = (props: AddTransactionProps) => {
         onChange={handleInputChange('category')}
         label="Category"
         placeholder="Select category"
-        options={tab === 'expenses' ? EXPENSE_CATEGORIES : INCOME_CATEGORIES}
+        options={getSelectCategoriesData(tab)}
         value={transaction.category}
       />
       <Button
@@ -103,4 +104,17 @@ export const AddTransaction = (props: AddTransactionProps) => {
       {mutation.isError && <p>Error: {mutation.error.message}</p>}
     </div>
   )
+}
+
+const getSelectCategoriesData = (tab: TransactionTabs) => {
+  switch (tab) {
+    case 'expenses':
+      return EXPENSE_CATEGORIES
+    case 'income':
+      return INCOME_CATEGORIES
+    case 'all':
+      return [...EXPENSE_CATEGORIES, ...INCOME_CATEGORIES]
+    default:
+      return []
+  }
 }

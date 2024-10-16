@@ -1,2 +1,2 @@
 export type TransactionTabs = 'all' | 'income' | 'expenses'
-export type CurrencyLabels = 'uah' | 'usd' | 'eur'
+export type CurrencyLabels = 'UAH' | 'USD' | 'EUR'

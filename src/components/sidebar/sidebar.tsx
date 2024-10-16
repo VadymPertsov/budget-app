@@ -40,8 +40,7 @@ export const Sidebar = () => {
           <Select
             className={styles.link}
             onChange={setCurrency}
-            label="Currency"
-            placeholder="Select currency"
+            label="Select currency"
             options={allCurrency}
             value={currency}
           />

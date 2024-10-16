@@ -1,3 +1,4 @@
+import { CurrentCurrency } from '@components/_shared/current-currency'
 import { auth } from '@components/firebase'
 import { PieChart } from '@features/charts/components/pie-chart'
 import { fetchTransactions, QUERY_KEYS } from '@features/transactions/api'
@@ -7,7 +8,6 @@ import randomColor from 'randomcolor'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 import styles from './styles.module.scss'
-import { CurrentCurrency } from '@components/_shared/current-currency'
 
 export const Overview = () => {
   const [user, loading] = useAuthState(auth)
