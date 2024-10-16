@@ -5,3 +5,11 @@
 .title {
   text-align: center;
 }
+.tooltip {
+  padding: rem(10px);
+  border-radius: 5px;
+}
+.label {
+  color: $white;
+  font-weight: 500;
+}

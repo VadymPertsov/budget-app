@@ -18,28 +18,28 @@ export const Overview = () => {
   })
 
   if (loading) return <p>Loading...</p>
-  if (!transactionsData) return <p>Something went wrong</p>
+  if (transactionsData === undefined) return <p>login please</p>
 
   return (
     <div className={styles.root}>
       Hello,&nbsp;
-      {user ? (
+      {user && (
         <>
           {user?.displayName}. Your current balance:&nbsp;
           <b>{transactionsData?.currentBalance || 0}</b>
-          <div className={styles.charts}>
-            <PieChart
-              title="Expenses"
-              data={buildChartData(transactionsData.expenses)}
-            />
-            <PieChart
-              title="Income"
-              data={buildChartData(transactionsData.income)}
-            />
-          </div>
+          {transactionsData && (
+            <div className={styles.charts}>
+              <PieChart
+                title="Expenses"
+                data={buildChartData(transactionsData.expenses)}
+              />
+              <PieChart
+                title="Income"
+                data={buildChartData(transactionsData.income)}
+              />
+            </div>
+          )}
         </>
-      ) : (
-        'login please'
       )}
     </div>
   )

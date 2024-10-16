@@ -10,7 +10,7 @@
     background: colorAdjust($purple, -10%);
   }
   &:disabled {
-    background: colorAdjust($purple, 5%);
+    background: colorAdjust($purple, 10%);
     pointer-events: none;
   }
 }
