@@ -13,7 +13,7 @@ export const Transactions = () => {
   const [user] = useAuthState(auth)
   const queryClient = useQueryClient()
 
-  const [tab, setTab] = useState<Transaction['type']>('expenses')
+  const [tab, setTab] = useState<Transaction['type']>('all')
 
   const {
     data: transactionsData,

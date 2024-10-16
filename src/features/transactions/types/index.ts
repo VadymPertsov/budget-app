@@ -1,6 +1,6 @@
 export interface Transaction {
-  type: 'income' | 'expenses'
-  value: string
+  type: 'all' | 'income' | 'expenses'
+  value: number
   category: string
   createdAt: string
 }

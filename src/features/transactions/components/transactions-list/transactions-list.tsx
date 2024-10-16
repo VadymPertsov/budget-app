@@ -18,10 +18,20 @@ export const TransactionsList = (props: TransactionsListProps) => {
   const sortedTransactions = useMemo(() => {
     if (!transactions) return []
 
-    const transactionsData =
-      tab === 'expenses' ? transactions.expenses : transactions.income
+    const getTransactionsData = (tab: TransactionsListProps['tab']) => {
+      switch (tab) {
+        case 'expenses':
+          return transactions.expenses
+        case 'income':
+          return transactions.income
+        case 'all':
+          return [...transactions.expenses, ...transactions.income]
+        default:
+          return []
+      }
+    }
 
-    return transactionsData.sort(
+    return getTransactionsData(tab).sort(
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
@@ -37,6 +47,11 @@ export const TransactionsList = (props: TransactionsListProps) => {
   return (
     <div className={styles.root}>
       <div className={styles.tabs}>
+        <Button
+          onClick={() => handleChangeTab('all')}
+          text="All"
+          isActive={tab === 'all'}
+        />
         <Button
           onClick={() => handleChangeTab('expenses')}
           text="Expenses"
