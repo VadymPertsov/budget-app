@@ -21,7 +21,7 @@ export const AddTransaction = (props: AddTransactionProps) => {
 
   const [user] = useAuthState(auth)
   const [transaction, setTransaction] = useState<Transaction>({
-    value: '',
+    value: 0,
     category: '',
     type: tab,
     createdAt: new Date().toISOString(),
@@ -42,7 +42,7 @@ export const AddTransaction = (props: AddTransactionProps) => {
         queryKey: [QUERY_KEYS.transactions, user?.uid],
       })
       setTransaction({
-        value: '',
+        value: 0,
         category: '',
         type: tab,
         createdAt: new Date().toISOString(),
@@ -78,7 +78,7 @@ export const AddTransaction = (props: AddTransactionProps) => {
   return (
     <div className={styles.root}>
       <Input
-        value={transaction.value}
+        value={transaction.value === 0 ? '' : transaction.value}
         onChange={handleInputChange('value')}
         label="Value"
         type="number"
