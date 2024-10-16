@@ -32,7 +32,6 @@ export const PieChart = (props: PieChartProps) => {
             data={data}
             cx="50%"
             cy="50%"
-            label
             outerRadius={80}
             fill="#8884d8"
             dataKey="value"
