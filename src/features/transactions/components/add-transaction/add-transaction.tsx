@@ -4,6 +4,7 @@ import { Select } from '@components/_shared/select'
 import { auth } from '@components/firebase'
 import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from '@constants/categories'
 import { addTransaction, QUERY_KEYS } from '@features/transactions/api'
+import { useTransactionsStore } from '@features/transactions/store'
 import { Transaction } from '@features/transactions/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -13,11 +14,12 @@ import styles from './styles.module.scss'
 
 interface AddTransactionProps {
   onTransactionAdded: () => void
-  tab: Transaction['type']
 }
 
 export const AddTransaction = (props: AddTransactionProps) => {
-  const { onTransactionAdded, tab } = props
+  const { onTransactionAdded } = props
+
+  const { tab } = useTransactionsStore(state => state)
 
   const [user] = useAuthState(auth)
   const [transaction, setTransaction] = useState<Transaction>({
@@ -80,7 +82,7 @@ export const AddTransaction = (props: AddTransactionProps) => {
       <Input
         value={transaction.value === 0 ? '' : transaction.value}
         onChange={handleInputChange('value')}
-        label="Value"
+        label="Value in UAH(only)"
         type="number"
         placeholder="0"
       />

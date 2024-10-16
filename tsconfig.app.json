@@ -35,7 +35,8 @@
       "@features/*": ["features/*"],
       "@context/*": ["context/*"],
       "@pages/*": ["pages/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@store/*": ["store/*"]
     }
   },
   "include": ["src/**/*"],

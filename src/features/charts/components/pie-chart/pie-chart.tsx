@@ -1,3 +1,4 @@
+import { CurrentCurrency } from '@components/_shared/current-currency'
 import {
   PieChart as PieChartItem,
   Pie,
@@ -40,7 +41,7 @@ export const PieChart = (props: PieChartProps) => {
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
-          <Tooltip content={<CustomTooltip total={total} currency="uah" />} />
+          <Tooltip content={<CustomTooltip total={total} />} />
         </PieChartItem>
       </ResponsiveContainer>
     </div>
@@ -51,15 +52,9 @@ interface CustomTooltipProps {
   payload?: Array<{ payload: PieChartProps['data'][0] }>
   active?: boolean
   total: number
-  currency: string
 }
 
-const CustomTooltip = ({
-  active,
-  payload,
-  total,
-  currency,
-}: CustomTooltipProps) => {
+const CustomTooltip = ({ active, payload, total }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
     const { name, color, value } = payload[0].payload
     const percentage = ((value / total) * 100).toFixed(2)
@@ -73,9 +68,8 @@ const CustomTooltip = ({
         }}
       >
         <p className={styles.label}>{name}:</p>
-        <p
-          className={styles.label}
-        >{`${value} ${currency} (${percentage}%)`}</p>
+        <CurrentCurrency className={styles.label} value={value} />
+        <span className={styles.label}>{`(${percentage}%)`}</span>
       </div>
     )
   }

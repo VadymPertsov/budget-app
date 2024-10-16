@@ -7,6 +7,7 @@ import randomColor from 'randomcolor'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 import styles from './styles.module.scss'
+import { CurrentCurrency } from '@components/_shared/current-currency'
 
 export const Overview = () => {
   const [user, loading] = useAuthState(auth)
@@ -26,7 +27,7 @@ export const Overview = () => {
       {user && (
         <>
           {user?.displayName}. Your current balance:&nbsp;
-          <b>{transactionsData?.currentBalance || 0}</b>
+          <CurrentCurrency value={transactionsData?.currentBalance} />
           {transactionsData && (
             <div className={styles.charts}>
               <PieChart

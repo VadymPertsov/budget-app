@@ -1,5 +1,7 @@
+import { TransactionTabs } from 'types'
+
 export interface Transaction {
-  type: 'all' | 'income' | 'expenses'
+  type: TransactionTabs
   value: number
   category: string
   createdAt: string

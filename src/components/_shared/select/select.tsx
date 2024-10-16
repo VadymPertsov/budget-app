@@ -1,22 +1,30 @@
+import cn from 'classnames'
+
 import styles from './styles.module.scss'
 
-interface SelectProps {
+interface SelectProps<T> {
   label?: string
   placeholder: string
-  options: string[]
-  onChange: (value: string) => void
-  value: string
+  options: T[]
+  onChange: (value: T) => void
+  value: T
+  className?: string
 }
 
-export const Select = (props: SelectProps) => {
-  const { label, placeholder, options, onChange, value } = props
-
+export const Select = <T extends string | number>({
+  label,
+  placeholder,
+  options,
+  onChange,
+  value,
+  className,
+}: SelectProps<T>) => {
   return (
-    <div className={styles.root}>
+    <div className={cn(styles.root, className)}>
       {label && <p className={styles.label}>{label}</p>}
       <select
         className={styles.select}
-        onChange={e => onChange(e.target.value)}
+        onChange={e => onChange(e.target.value as T)}
         value={value}
       >
         <option value="">{placeholder}</option>

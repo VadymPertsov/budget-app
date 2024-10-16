@@ -1,5 +1,7 @@
+import { Select } from '@components/_shared/select'
 import { auth } from '@components/firebase'
 import { PRIVATE_ROUTES, ROUTES } from '@constants/routes'
+import { useCurrencyStore } from '@store/currency-store'
 import cn from 'classnames'
 import {
   useAuthState,
@@ -14,6 +16,10 @@ export const Sidebar = () => {
   const [user, loading, error] = useAuthState(auth)
   const [signInWithGoogle] = useSignInWithGoogle(auth)
   const [signOut] = useSignOut(auth)
+
+  const { currency, setCurrency, allCurrency } = useCurrencyStore(
+    state => state
+  )
 
   if (error) return <p>Error: {error.message}</p>
 
@@ -30,6 +36,16 @@ export const Sidebar = () => {
             </Link>
           </li>
         ))}
+        <li>
+          <Select
+            className={styles.link}
+            onChange={setCurrency}
+            label="Currency"
+            placeholder="Select currency"
+            options={allCurrency}
+            value={currency}
+          />
+        </li>
       </ul>
       <div className={styles.auth}>
         {loading ? (

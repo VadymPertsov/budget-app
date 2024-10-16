@@ -1,24 +1,27 @@
 import { Button } from '@components/_shared/button'
+import { useTransactionsStore } from '@features/transactions/store'
 import { Transaction, TransactionsData } from '@features/transactions/types'
 import { normalizeDate } from '@utils/normalize-date'
 import cn from 'classnames'
 import { useCallback, useMemo } from 'react'
+import { TransactionTabs } from 'types'
 
 import styles from './styles.module.scss'
+import { CurrentCurrency } from '@components/_shared/current-currency'
 
 interface TransactionsListProps {
   transactions: TransactionsData | null | undefined
-  tab: Transaction['type']
-  setTab: (tab: Transaction['type']) => void
 }
 
 export const TransactionsList = (props: TransactionsListProps) => {
-  const { transactions, tab, setTab } = props
+  const { transactions } = props
+
+  const { tab, setTab } = useTransactionsStore(state => state)
 
   const sortedTransactions = useMemo(() => {
     if (!transactions) return []
 
-    const getTransactionsData = (tab: TransactionsListProps['tab']) => {
+    const getTransactionsData = (tab: TransactionTabs) => {
       switch (tab) {
         case 'expenses':
           return transactions.expenses
@@ -75,7 +78,8 @@ export const TransactionsList = (props: TransactionsListProps) => {
                 [styles.expenses]: item.type === 'expenses',
               })}
             >
-              {normalizeDate(item.createdAt)} - {item.category}: {item.value}
+              {normalizeDate(item.createdAt)} - {item.category}:&nbsp;
+              <CurrentCurrency value={item.value} />
             </li>
           ))
         )}
