@@ -17,9 +17,7 @@ export const Sidebar = () => {
   const [signInWithGoogle] = useSignInWithGoogle(auth)
   const [signOut] = useSignOut(auth)
 
-  const { currency, setCurrency, allCurrency } = useCurrencyStore(
-    state => state
-  )
+  const { currency, setCurrency, allCurrency } = useCurrencyStore()
 
   if (error) return <p>Error: {error.message}</p>
 

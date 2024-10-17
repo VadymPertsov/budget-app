@@ -1,6 +1,7 @@
 import { TransactionTabs } from 'types'
 
 export interface Transaction {
+  id: string
   type: TransactionTabs
   value: number
   category: string

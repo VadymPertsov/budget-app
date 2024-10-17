@@ -1,7 +1,24 @@
 .root {
   margin-top: 2rem;
 }
-
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: rem(10px);
+  height: rem(56px);
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  &:nth-of-type(odd) {
+    background: colorAdjust($purple, 40%);
+  }
+  &:hover {
+    background: colorAdjust($purple, 30%);
+    .removeBtn {
+      opacity: 1;
+    }
+  }
+}
 .income {
   color: green;
 }
@@ -10,7 +27,6 @@
 }
 .list {
   display: flex;
-  gap: rem(16px);
   flex-direction: column;
 }
 .tabs {
@@ -18,4 +34,14 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+}
+.removeBtn {
+  height: 100%;
+  padding-inline: 1rem;
+  color: $black;
+  font-weight: 700;
+  background: colorAdjust($purple, 35%);
+  border-radius: 5px;
+  transition: opacity 0.3s ease;
+  opacity: 0;
 }

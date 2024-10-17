@@ -16,7 +16,7 @@ interface CurrentCurrencyProps {
 export const CurrentCurrency = (props: CurrentCurrencyProps) => {
   const { className, value = 0 } = props
 
-  const { currency } = useCurrencyStore(state => state)
+  const currency = useCurrencyStore(state => state.currency)
 
   const convertedValue = (value * (EXCHANGE_RATE[currency] || 1)).toFixed(2)
 

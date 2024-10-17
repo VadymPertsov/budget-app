@@ -12,14 +12,13 @@ import styles from './styles.module.scss'
 export const Overview = () => {
   const [user, loading] = useAuthState(auth)
 
-  const { data: transactionsData } = useQuery<TransactionsData | null, Error>({
+  const { data } = useQuery<TransactionsData | null, Error>({
     queryKey: [QUERY_KEYS.transactions, user?.uid],
     queryFn: () => (user ? fetchTransactions(user.uid) : null),
-    enabled: !!user,
   })
 
   if (loading) return <p>Loading...</p>
-  if (transactionsData === undefined) return <p>login please</p>
+  if (data === undefined) return <p>login please</p>
 
   return (
     <div className={styles.root}>
@@ -27,17 +26,11 @@ export const Overview = () => {
       {user && (
         <>
           {user?.displayName}. Your current balance:&nbsp;
-          <CurrentCurrency value={transactionsData?.currentBalance} />
-          {transactionsData && (
+          <CurrentCurrency value={data?.currentBalance} />
+          {data && (
             <div className={styles.charts}>
-              <PieChart
-                title="Expenses"
-                data={buildChartData(transactionsData.expenses)}
-              />
-              <PieChart
-                title="Income"
-                data={buildChartData(transactionsData.income)}
-              />
+              <PieChart title="Expenses" data={buildChartData(data.expenses)} />
+              <PieChart title="Income" data={buildChartData(data.income)} />
             </div>
           )}
         </>

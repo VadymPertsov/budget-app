@@ -10,20 +10,16 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { TransactionTabs } from 'types'
+import { v4 as uuidv4 } from 'uuid'
 
 import styles from './styles.module.scss'
 
-interface AddTransactionProps {
-  onTransactionAdded: () => void
-}
-
-export const AddTransaction = (props: AddTransactionProps) => {
-  const { onTransactionAdded } = props
-
-  const { tab } = useTransactionsStore(state => state)
+export const AddTransaction = () => {
+  const tab = useTransactionsStore(state => state.tab)
 
   const [user] = useAuthState(auth)
   const [transaction, setTransaction] = useState<Transaction>({
+    id: uuidv4(),
     value: 0,
     category: '',
     type: tab,
@@ -45,12 +41,12 @@ export const AddTransaction = (props: AddTransactionProps) => {
         queryKey: [QUERY_KEYS.transactions, user?.uid],
       })
       setTransaction({
+        id: uuidv4(),
         value: 0,
         category: '',
         type: tab,
         createdAt: new Date().toISOString(),
       })
-      onTransactionAdded()
     },
     onError: error => {
       console.error('Error adding transaction: ', error)
